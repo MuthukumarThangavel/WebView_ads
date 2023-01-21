@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_ads/controller/hi.dart';
+import 'package:webview_ads/second.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  Home({super.key});
+
+  HiController controller = Get.put(HiController());
 
   @override
   Widget build(BuildContext context) {
@@ -61,21 +67,28 @@ class Home extends StatelessWidget {
                           height: size.height * 0.19,
                           width: size.width,
                           // color: Colors.amberAccent,
-                          child: Center(
-                            child: SelectableLinkify(
-                              text:
-                                  "Wellcome to GoApp https://goappinfo.tech/\n\nMail: goappinfotech@gmail.com",
-                              style: TextStyle(fontSize: 20),
-                              onOpen: _onOpen,
-                              // onOpen: (link) async {
-                              //   final Uri url = Uri.parse(link.url);
-                              //   if (!await launchUrl(url)) {
-                              //     throw 'Could not launch $url';
-                              //   }
-                              // },
-                              onTap: () {
-                                print("hi");
-                              },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SelectableLinkify(
+                                  text:
+                                      "Video 1 : https://www.youtube.com/watch?v=lrf-GAYUOkQ\n\nVideo 2 : https://www.youtube.com/watch?v=UKRYHQALlAI",
+                                  style: TextStyle(fontSize: 20),
+                                  // onOpen: _onOpen,
+                                  onOpen: (link) async {
+                                    Get.to(() => Second(),arguments: link.url);
+                                  //   final Uri url = Uri.parse(link.url);
+                                  //   if (!await launchUrl(url)) {
+                                  //     throw 'Could not launch $url';
+                                  // }
+                                  },
+                                  onTap: () {
+                                    print("hi");
+                                    },
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -92,7 +105,8 @@ class Home extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: size.width * 0.02),
-                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Icon(Icons.favorite_border_outlined),
                                 Icon(Icons.message_outlined),
@@ -118,9 +132,23 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 // Container(
-                //   height: size.height/2,
+                //   height: size.height*0.05,
                 //   width: size.width,
-                //   child: 
+                //   color: Colors.green,
+                //   child: )
+                // Container(
+                //   height: size.height * 0.05,
+                //   width: size.width,
+                //   color: Colors.green,
+                //   child: controller.isLoad
+                //       ? Container(
+                //           height: controller.bannerAd.size.height.toDouble(),
+                //           width: controller.bannerAd.size.width.toDouble(),
+                //           child: AdWidget(ad: controller.bannerAd),
+                //         )
+                //       : SizedBox(
+                //           child: Center(child: Text("No ads available")),
+                //         ),
                 // ),
               ],
             ),
@@ -132,9 +160,8 @@ class Home extends StatelessWidget {
 
   Future<void> _onOpen(LinkableElement link) async {
     final Uri url = Uri.parse(link.url);
-                                if (!await launchUrl(url)) {
-                                  throw 'Could not launch $url';
-                                }
-                              
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $url';
+    }
   }
 }
