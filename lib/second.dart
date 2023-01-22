@@ -47,6 +47,7 @@ class Second extends StatelessWidget {
                         child: WebView(
                           initialUrl: "$one",
                           javascriptMode: JavascriptMode.unrestricted,
+                          
                         ),
                       ),
                     ],
