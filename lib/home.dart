@@ -34,26 +34,7 @@ class Home extends StatelessWidget {
                   Divider(),
                   CardC(),
                   Divider(),
-                  // Container(
-                  //   height: size.height*0.05,
-                  //   width: size.width,
-                  //   color: Colors.green,
-                  //   child: )
-                  // Container(
-                  //   height: size.height * 0.05,
-                  //   width: size.width,
-                  //   color: Colors.green,
-                  //   child: controller.isLoad
-                  //       ? Container(
-                  //           height: controller.bannerAd.size.height.toDouble(),
-                  //           width: controller.bannerAd.size.width.toDouble(),
-                  //           child: AdWidget(ad: controller.bannerAd),
-                  //         )
-                  //       : SizedBox(
-                  //           child: Center(child: Text("No ads available")),
-                  //         ),
-                  // ),
-                ],
+                  ],
               ),
             ),
           ),
